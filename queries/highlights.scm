@@ -7,3 +7,6 @@
 (verbatim) @markup.raw
 
 (bold) @text.bold
+
+(emphasized
+ (text) @text.emphasis)
