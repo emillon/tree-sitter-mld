@@ -11,5 +11,6 @@ html
 
 (source_file
   (text)
-  (html)
+  (html
+    (html_content))
   (text))
