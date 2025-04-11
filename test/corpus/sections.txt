@@ -18,15 +18,67 @@ sections
 
 (source_file
   (text)
-  (header)
+  (section0
+    (header0)
+    (text)
+    (section1
+      (header1)
+      (text)
+      (section2
+        (header2)
+        (text)
+        (section3
+          (header3)
+          (text)
+          (section4
+            (header4)
+            (text)
+            (section5
+              (header5)
+              (text))))))))
+
+=======
+nesting
+=======
+
+{0 L0}
+{1 L1}
+{2 L2}
+{2 L2}
+{1 L1}
+{2 L2}
+{3 L3}
+{3 L3}
+{2 L2}
+
+---
+
+(source_file
   (text)
-  (header)
-  (text)
-  (header)
-  (text)
-  (header)
-  (text)
-  (header)
-  (text)
-  (header)
-  (text))
+  (section0
+    (header0)
+    (text)
+    (section1
+      (header1)
+      (text)
+      (section2
+        (header2)
+        (text))
+      (section2
+        (header2)
+        (text)))
+    (section1
+      (header1)
+      (text)
+      (section2
+        (header2)
+        (text)
+        (section3
+          (header3)
+          (text))
+        (section3
+          (header3)
+          (text)))
+      (section2
+        (header2)
+        (text)))))

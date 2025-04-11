@@ -6,9 +6,8 @@ module.exports = grammar({
 
   rules: {
     source_file: ($) => repeat($._item),
-    _item: ($) =>
+    _other_item: ($) =>
       choice(
-        $.header,
         $.table,
         $.tr,
         $.th,
@@ -32,8 +31,26 @@ module.exports = grammar({
         $.inline_code,
         $.comment,
       ),
-    _doc: ($) => repeat1($._item),
-    header: ($) => seq("{", choice("0", "1", "2", "3", "4", "5"), /[^}]+/, "}"),
+    _doc: ($) => repeat1($._item), // XXX other_item?
+    _item: ($) => choice($._other_item, $.section0),
+    _item0: ($) => choice($._other_item, $.section1),
+    _item1: ($) => choice($._other_item, $.section2),
+    _item2: ($) => choice($._other_item, $.section3),
+    _item3: ($) => choice($._other_item, $.section4),
+    _item4: ($) => choice($._other_item, $.section5),
+    _item5: ($) => $._other_item,
+    section0: ($) => prec.right(seq($.header0, repeat($._item0))),
+    section1: ($) => prec.right(seq($.header1, repeat($._item1))),
+    section2: ($) => prec.right(seq($.header2, repeat($._item2))),
+    section3: ($) => prec.right(seq($.header3, repeat($._item3))),
+    section4: ($) => prec.right(seq($.header4, repeat($._item4))),
+    section5: ($) => prec.right(seq($.header5, repeat($._item5))),
+    header0: ($) => seq("{0", /[^}]+/, "}"),
+    header1: ($) => seq("{1", /[^}]+/, "}"),
+    header2: ($) => seq("{2", /[^}]+/, "}"),
+    header3: ($) => seq("{3", /[^}]+/, "}"),
+    header4: ($) => seq("{4", /[^}]+/, "}"),
+    header5: ($) => seq("{5", /[^}]+/, "}"),
     text: ($) => /[^{}\[]+/,
     table: ($) => seq("{table", $._doc, "}"),
     tr: ($) => seq("{tr", $._doc, "}"),
@@ -57,7 +74,7 @@ module.exports = grammar({
     link: ($) => choice($.link_target, seq("{", $.link_target, $._doc, "}")),
     link_target: ($) => seq(choice("{!", "{:"), /[^}]+/, "}"),
     html: ($) => seq("{%html:", $.html_content, "%}"),
-    html_content: $ => /[^%]+/,
+    html_content: ($) => /[^%]+/,
     bold: ($) => seq("{b", $._doc, "}"),
     italic: ($) => seq("{i", $._doc, "}"),
     emphasized: ($) => seq("{e", $._doc, "}"),
