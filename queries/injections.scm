@@ -10,3 +10,7 @@
 (html
  (html_content) @injection.content
  (#set! injection.language "html"))
+
+(math_inline
+ (text) @injection.content
+ (#set! injection.language "latex"))
